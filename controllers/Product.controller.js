@@ -1,11 +1,11 @@
-const Post = require('../models/Post.model')
+const Product = require('../models/Product.model')
 
-const createPost = async (req, res) => {
+const createProduct = async (req, res) => {
     try {
-        const post = new Post(req.body)
-        const resp = await post.save()
+        const product = new Product(req.body)
+        const resp = await product.save()
         return res.json({
-            message: 'Post was created successfully',
+            message: 'Product was created successfully',
             detail: resp
         })
     } catch (err) {
@@ -16,13 +16,11 @@ const createPost = async (req, res) => {
     }
 }
 
-const getPosts = async (req, res) => {
+const getProducts = async (req, res) => {
     try {
-        const resp = await Post.find()
-            .populate('category')
-            .populate('user')
+        const resp = await Product.find()
         return res.json({
-            message: 'Posts',
+            message: 'Products',
             detail: resp
         })
     } catch (err) {
@@ -33,17 +31,17 @@ const getPosts = async (req, res) => {
     }
 }
 
-const updatePost = async (req, res) => {
+const updateProduct = async (req, res) => {
     try {
         const newData = req.body
 
-        const resp = await Post.findByIdAndUpdate(
-            newData.postId,
+        const resp = await Product.findByIdAndUpdate(
+            newData.productId,
             { $set: newData },
             { new: true })
 
         return res.json({
-            message: 'Post updated successfully',
+            message: 'Product updated successfully',
             detail: resp
         })
     } catch (err) {
@@ -54,12 +52,12 @@ const updatePost = async (req, res) => {
     }
 }
 
-const deletePost = async (req, res) => {
+const deleteProduct = async (req, res) => {
     try {
-        const resp = await Post.findByIdAndDelete(req.body.postId)
+        const resp = await Product.findByIdAndDelete(req.body.productId)
 
         return res.json({
-            message: 'Post deleted successfully',
+            message: 'Product deleted successfully',
             detail: resp
         })
     } catch (err) {
@@ -71,8 +69,8 @@ const deletePost = async (req, res) => {
 }
 
 module.exports = {
-    createPost,
-    getPosts,
-    updatePost,
-    deletePost
+    createProduct,
+    getProducts,
+    updateProduct,
+    deleteProduct
 }
