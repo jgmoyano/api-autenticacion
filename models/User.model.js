@@ -15,7 +15,7 @@ userSchema.methods.hashPassword = function (password) {
 }
 
 userSchema.methods.generateJWT = function () {
-    return jwt.sign({userId: this._id}, secret)
+    return jwt.sign({userId: this._id, firstName: this.firstName, lastName: this.lastName}, secret)
 }
 
 userSchema.methods.onSignUpGenerateJWT = function () {

@@ -40,9 +40,12 @@ const login = async (req, res) => {
                 message: 'wrong password'
             })
         }
+
+        const response = {firstName: userFound.firstName, email: userFound.email}
+
         return res.json({
             message: 'Ok',
-            detail: { user: userFound, token: userFound.generateJWT() }
+            detail: { user: response, token: userFound.generateJWT() }
         })
 
     } catch (err) {
